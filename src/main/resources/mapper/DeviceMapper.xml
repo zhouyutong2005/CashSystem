@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cashsystem.mapper.DeviceMapper">
+
+    <resultMap id="BaseResultMap" type="com.cashsystem.entity.Device">
+        <id column="id" property="id" />
+        <result column="branch_id" property="branchId" />
+        <result column="device_code" property="deviceCode" />
+        <result column="device_name" property="deviceName" />
+        <result column="appid" property="appid" />
+        <result column="secret" property="secret" />
+        <result column="lock_sn" property="lockSn" />
+        <result column="cash_preset" property="cashPreset" />
+        <result column="software_version" property="softwareVersion" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 多条件查询设备 -->
+    <select id="findByConditions" resultMap="BaseResultMap">
+        SELECT d.*, b.branch_name, c.client_name
+        FROM devices d
+        LEFT JOIN branches b ON d.branch_id = b.id
+        LEFT JOIN clients c ON b.client_id = c.id
+        WHERE 1=1
+        <if test="branchId != null">
+            AND d.branch_id = #{branchId}
+        </if>
+        <if test="clientId != null">
+            AND b.client_id = #{clientId}
+        </if>
+        <if test="status != null and status != ''">
+            AND d.status = #{status}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (d.device_code LIKE CONCAT('%', #{keyword}, '%') OR d.device_name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        ORDER BY d.id DESC
+    </select>
+
+    <!-- 分页查询设备 -->
+    <select id="findByPage" resultMap="BaseResultMap">
+        SELECT d.*, b.branch_name
+        FROM devices d
+        LEFT JOIN branches b ON d.branch_id = b.id
+        WHERE 1=1
+        <if test="branchId != null">
+            AND d.branch_id = #{branchId}
+        </if>
+        <if test="status != null and status != ''">
+            AND d.status = #{status}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (d.device_code LIKE CONCAT('%', #{keyword}, '%') OR d.device_name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        ORDER BY d.id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <!-- 统计设备数量 -->
+    <select id="countByConditions" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM devices d
+        LEFT JOIN branches b ON d.branch_id = b.id
+        WHERE 1=1
+        <if test="branchId != null">
+            AND d.branch_id = #{branchId}
+        </if>
+        <if test="status != null and status != ''">
+            AND d.status = #{status}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (d.device_code LIKE CONCAT('%', #{keyword}, '%') OR d.device_name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+    </select>
+
+    <!-- 设备统计信息 -->
+    <select id="getDeviceStatistics" resultType="java.util.Map">
+        SELECT
+        COUNT(*) as total_count,
+        COUNT(CASE WHEN status = '运行' THEN 1 END) as running_count,
+        COUNT(CASE WHEN status = '停用' THEN 1 END) as stopped_count,
+        COUNT(CASE WHEN status = '故障' THEN 1 END) as fault_count
+        FROM devices
+        WHERE 1=1
+        <if test="branchId != null">
+            AND branch_id = #{branchId}
+        </if>
+        <if test="clientId != null">
+            AND branch_id IN (SELECT id FROM branches WHERE client_id = #{clientId})
+        </if>
+    </select>
+
+    <!-- 批量更新设备状态 -->
+    <update id="batchUpdateStatus">
+        UPDATE devices
+        SET status = #{status}
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

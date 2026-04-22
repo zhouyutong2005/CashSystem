@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+# 测试环境JWT配置
+jwt:
+  secret: test-secret-key-for-jwt-token
+  expiration: 3600000
+
+# 日志配置
+logging:
+  level:
+    com.cashsystem: DEBUG
+    org.springframework.security: DEBUG

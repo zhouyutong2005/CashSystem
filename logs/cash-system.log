@@ -1,0 +1,141 @@
+2026-04-22T15:12:29.523+08:00  INFO 10584 --- [main] com.cashsystem.mapper.UserMapperTest     : Starting UserMapperTest using Java 17 with PID 10584 (started by Administrator in D:\信息缴存系统\cash-system)
+2026-04-22T15:12:29.531+08:00 DEBUG 10584 --- [main] com.cashsystem.mapper.UserMapperTest     : Running with Spring Boot v3.4.12, Spring v6.2.14
+2026-04-22T15:12:29.532+08:00  INFO 10584 --- [main] com.cashsystem.mapper.UserMapperTest     : No active profile set, falling back to 1 default profile: "default"
+2026-04-22T15:12:31.156+08:00  WARN 10584 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: e4f262ed-1446-4502-86a0-346414cca33e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-22T15:12:31.184+08:00  INFO 10584 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-04-22T15:12:31.863+08:00  INFO 10584 --- [main] com.cashsystem.mapper.UserMapperTest     : Started UserMapperTest in 2.638 seconds (process running for 5.148)
+2026-04-22T15:12:31.886+08:00  INFO 10584 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-22T15:12:32.264+08:00  INFO 10584 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@48682f91
+2026-04-22T15:12:32.266+08:00  INFO 10584 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-22T15:12:32.626+08:00  INFO 10584 --- [main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.cashsystem.CashSystemApplicationTest]: CashSystemApplicationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-04-22T15:12:32.634+08:00  INFO 10584 --- [main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.cashsystem.CashSystemApplication for test class com.cashsystem.CashSystemApplicationTest
+2026-04-22T15:12:32.637+08:00  INFO 10584 --- [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2026-04-22T15:12:32.668+08:00  INFO 10584 --- [main] c.cashsystem.CashSystemApplicationTest   : Starting CashSystemApplicationTest using Java 17 with PID 10584 (started by Administrator in D:\信息缴存系统\cash-system)
+2026-04-22T15:12:32.668+08:00 DEBUG 10584 --- [main] c.cashsystem.CashSystemApplicationTest   : Running with Spring Boot v3.4.12, Spring v6.2.14
+2026-04-22T15:12:32.668+08:00  INFO 10584 --- [main] c.cashsystem.CashSystemApplicationTest   : The following 1 profile is active: "test"
+2026-04-22T15:12:33.070+08:00  WARN 10584 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: febdc14c-e10a-4ab1-ad49-56a2373a3b76
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-22T15:12:33.072+08:00  INFO 10584 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-04-22T15:12:33.166+08:00 DEBUG 10584 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-04-22T15:12:33.278+08:00  INFO 10584 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-04-22T15:12:33.432+08:00  INFO 10584 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-04-22T15:12:33.432+08:00  INFO 10584 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-04-22T15:12:33.435+08:00  INFO 10584 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2026-04-22T15:12:33.522+08:00  INFO 10584 --- [main] c.cashsystem.CashSystemApplicationTest   : Started CashSystemApplicationTest in 0.884 seconds (process running for 6.806)
+2026-04-22T15:12:33.534+08:00  INFO 10584 --- [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2026-04-22T15:12:33.554+08:00  INFO 10584 --- [main] com.cashsystem.CashSystemApplication     : Starting CashSystemApplication using Java 17 with PID 10584 (started by Administrator in D:\信息缴存系统\cash-system)
+2026-04-22T15:12:33.554+08:00 DEBUG 10584 --- [main] com.cashsystem.CashSystemApplication     : Running with Spring Boot v3.4.12, Spring v6.2.14
+2026-04-22T15:12:33.555+08:00  INFO 10584 --- [main] com.cashsystem.CashSystemApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-04-22T15:12:33.903+08:00  INFO 10584 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-22T15:12:33.922+08:00  INFO 10584 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-22T15:12:33.922+08:00  INFO 10584 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.49]
+2026-04-22T15:12:33.972+08:00  INFO 10584 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-22T15:12:33.973+08:00  INFO 10584 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 416 ms
+2026-04-22T15:12:34.010+08:00 DEBUG 10584 --- [main] c.c.config.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
+2026-04-22T15:12:34.145+08:00  WARN 10584 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 2b13808f-c5b1-45b1-bed1-b24de6f5c06c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-22T15:12:34.147+08:00  INFO 10584 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-04-22T15:12:34.324+08:00  INFO 10584 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-04-22T15:12:34.326+08:00  INFO 10584 --- [main] com.cashsystem.CashSystemApplication     : Started CashSystemApplication in 0.794 seconds (process running for 7.612)
+2026-04-22T15:12:34.344+08:00  INFO 10584 --- [main] o.s.b.d.r.RestartApplicationListener     : Restart disabled due to context in which it is running
+2026-04-22T15:12:34.368+08:00  INFO 10584 --- [main] c.c.c.AuthControllerIntegrationTest      : Starting AuthControllerIntegrationTest using Java 17 with PID 10584 (started by Administrator in D:\信息缴存系统\cash-system)
+2026-04-22T15:12:34.368+08:00 DEBUG 10584 --- [main] c.c.c.AuthControllerIntegrationTest      : Running with Spring Boot v3.4.12, Spring v6.2.14
+2026-04-22T15:12:34.368+08:00  INFO 10584 --- [main] c.c.c.AuthControllerIntegrationTest      : No active profile set, falling back to 1 default profile: "default"
+2026-04-22T15:12:34.741+08:00  WARN 10584 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c9b551ad-0fc3-41cc-8718-5ba9b469924b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-22T15:12:34.742+08:00  INFO 10584 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-04-22T15:12:34.945+08:00 DEBUG 10584 --- [main] c.c.config.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
+2026-04-22T15:12:34.945+08:00  INFO 10584 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-04-22T15:12:34.946+08:00  INFO 10584 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-04-22T15:12:34.947+08:00  INFO 10584 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-04-22T15:12:34.980+08:00  INFO 10584 --- [main] c.c.c.AuthControllerIntegrationTest      : Started AuthControllerIntegrationTest in 0.636 seconds (process running for 8.264)
+2026-04-22T15:12:35.022+08:00  WARN 10584 --- [main] c.c.config.JwtAuthenticationFilter       : JWT token无效或不存在
+2026-04-22T15:12:35.111+08:00  INFO 10584 --- [main] c.cashsystem.controller.AuthController   : 用户登录请求: account=admin
+2026-04-22T15:12:35.164+08:00  INFO 10584 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-22T15:12:35.172+08:00  INFO 10584 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-22T15:12:35.175+08:00  INFO 10584 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2026-04-22T15:12:35.176+08:00  INFO 10584 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2026-04-22T15:12:35.177+08:00  INFO 10584 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-22T15:12:35.318+08:00  INFO 10584 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-04-22T15:16:43.561+08:00  INFO 20904 --- [restartedMain] com.cashsystem.CashSystemApplication     : Starting CashSystemApplication using Java 17 with PID 20904 (D:\信息缴存系统\cash-system\target\classes started by Administrator in D:\信息缴存系统\cash-system)
+2026-04-22T15:16:43.565+08:00 DEBUG 20904 --- [restartedMain] com.cashsystem.CashSystemApplication     : Running with Spring Boot v3.4.12, Spring v6.2.14
+2026-04-22T15:16:43.565+08:00  INFO 20904 --- [restartedMain] com.cashsystem.CashSystemApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-04-22T15:16:43.597+08:00  INFO 20904 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-22T15:16:43.597+08:00  INFO 20904 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-22T15:16:44.552+08:00  INFO 20904 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-22T15:16:44.561+08:00  INFO 20904 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-22T15:16:44.561+08:00  INFO 20904 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.49]
+2026-04-22T15:16:44.589+08:00  INFO 20904 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-22T15:16:44.589+08:00  INFO 20904 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 991 ms
+2026-04-22T15:16:44.637+08:00 DEBUG 20904 --- [restartedMain] c.c.config.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
+2026-04-22T15:16:45.063+08:00  WARN 20904 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 1a0636af-a26d-4c3c-ba6e-7678a6e4f5a0
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-22T15:16:45.077+08:00  INFO 20904 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-04-22T15:16:45.529+08:00  INFO 20904 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-04-22T15:16:45.585+08:00  INFO 20904 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-04-22T15:16:45.592+08:00  INFO 20904 --- [restartedMain] com.cashsystem.CashSystemApplication     : Started CashSystemApplication in 2.357 seconds (process running for 2.889)
+2026-04-22T15:18:23.838+08:00  INFO 20904 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-22T15:18:23.838+08:00  INFO 20904 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-22T15:18:23.838+08:00  INFO 20904 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2026-04-22T15:20:40.111+08:00  INFO 20904 --- [http-nio-8080-exec-2] c.cashsystem.controller.AuthController   : 用户登录请求: account=cleaner1
+2026-04-22T15:20:40.127+08:00  INFO 20904 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-22T15:20:40.318+08:00  INFO 20904 --- [http-nio-8080-exec-2] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7975041b
+2026-04-22T15:20:40.318+08:00  INFO 20904 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-22T15:29:41.400+08:00  INFO 20904 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-22T15:29:41.529+08:00  INFO 20904 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-04-22T15:29:41.535+08:00  INFO 20904 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-22T15:29:41.539+08:00  INFO 20904 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-04-22T15:41:54.059+08:00  INFO 20220 --- [restartedMain] com.cashsystem.CashSystemApplication     : Starting CashSystemApplication using Java 17 with PID 20220 (D:\信息缴存系统\cash-system\target\classes started by Administrator in D:\信息缴存系统\cash-system)
+2026-04-22T15:41:54.062+08:00 DEBUG 20220 --- [restartedMain] com.cashsystem.CashSystemApplication     : Running with Spring Boot v3.4.12, Spring v6.2.14
+2026-04-22T15:41:54.062+08:00  INFO 20220 --- [restartedMain] com.cashsystem.CashSystemApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-04-22T15:41:54.095+08:00  INFO 20220 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-22T15:41:54.095+08:00  INFO 20220 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-22T15:41:55.029+08:00  INFO 20220 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-04-22T15:41:55.039+08:00  INFO 20220 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-22T15:41:55.039+08:00  INFO 20220 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.49]
+2026-04-22T15:41:55.065+08:00  INFO 20220 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-04-22T15:41:55.066+08:00  INFO 20220 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 970 ms
+2026-04-22T15:41:55.117+08:00 DEBUG 20220 --- [restartedMain] c.c.config.JwtAuthenticationFilter       : Filter 'jwtAuthenticationFilter' configured for use
+2026-04-22T15:41:55.546+08:00  WARN 20220 --- [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: f8440756-992c-45bd-947f-1bc64bcd1ad1
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-04-22T15:41:55.563+08:00  INFO 20220 --- [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-04-22T15:41:56.174+08:00  INFO 20220 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2026-04-22T15:41:56.258+08:00  INFO 20220 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-04-22T15:41:56.267+08:00  INFO 20220 --- [restartedMain] com.cashsystem.CashSystemApplication     : Started CashSystemApplication in 2.554 seconds (process running for 3.074)
+2026-04-22T15:42:28.109+08:00  INFO 20220 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-22T15:42:28.109+08:00  INFO 20220 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-04-22T15:42:28.109+08:00  INFO 20220 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2026-04-22T15:43:05.739+08:00  INFO 20220 --- [http-nio-8080-exec-2] c.cashsystem.controller.AuthController   : 用户登录请求: account=cleaner1
+2026-04-22T15:43:05.739+08:00  INFO 20220 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-22T15:43:05.930+08:00  INFO 20220 --- [http-nio-8080-exec-2] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@30dbb960
+2026-04-22T15:43:05.930+08:00  INFO 20220 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-22T15:45:03.660+08:00  INFO 20220 --- [http-nio-8080-exec-3] c.cashsystem.controller.AuthController   : 用户登录请求: account=admin
+2026-04-22T15:47:26.441+08:00  INFO 20220 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-22T15:47:26.575+08:00  INFO 20220 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2026-04-22T15:47:26.581+08:00  INFO 20220 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-04-22T15:47:26.584+08:00  INFO 20220 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

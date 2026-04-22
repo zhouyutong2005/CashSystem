@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cashsystem.mapper.CleaningTaskMapper">
+
+    <resultMap id="BaseResultMap" type="com.cashsystem.entity.CleaningTask">
+        <id column="id" property="id" />
+        <result column="device_id" property="deviceId" />
+        <result column="operator_a_id" property="operatorAId" />
+        <result column="operator_b_id" property="operatorBId" />
+        <result column="planned_start_time" property="plannedStartTime" />
+        <result column="planned_end_time" property="plannedEndTime" />
+        <result column="task_status" property="taskStatus" />
+        <result column="lock_sn" property="lockSn" />
+    </resultMap>
+
+    <!-- 查询待处理的清机任务（带设备信息） -->
+    <select id="findPendingTasks" resultType="java.util.Map">
+        SELECT
+        ct.*,
+        d.device_name,
+        d.device_code,
+        b.branch_name,
+        b.address as branch_address,
+        co1.name as operator_a_name,
+        co2.name as operator_b_name
+        FROM cleaning_tasks ct
+        LEFT JOIN devices d ON ct.device_id = d.id
+        LEFT JOIN branches b ON d.branch_id = b.id
+        LEFT JOIN cleaning_operators co1 ON ct.operator_a_id = co1.id
+        LEFT JOIN cleaning_operators co2 ON ct.operator_b_id = co2.id
+        WHERE ct.task_status = '待执行'
+        <if test="branchId != null">
+            AND b.id = #{branchId}
+        </if>
+        <if test="operatorId != null">
+            AND (ct.operator_a_id = #{operatorId} OR ct.operator_b_id = #{operatorId})
+        </if>
+        ORDER BY ct.planned_start_time ASC
+    </select>
+
+    <!-- 分页查询清机任务 -->
+    <select id="findByPage" resultMap="BaseResultMap">
+        SELECT ct.*
+        FROM cleaning_tasks ct
+        LEFT JOIN devices d ON ct.device_id = d.id
+        WHERE 1=1
+        <if test="deviceId != null">
+            AND ct.device_id = #{deviceId}
+        </if>
+        <if test="operatorId != null">
+            AND (ct.operator_a_id = #{operatorId} OR ct.operator_b_id = #{operatorId})
+        </if>
+        <if test="taskStatus != null and taskStatus != ''">
+            AND ct.task_status = #{taskStatus}
+        </if>
+        <if test="startTime != null">
+            AND ct.planned_start_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND ct.planned_start_time &lt;= #{endTime}
+        </if>
+        ORDER BY ct.planned_start_time DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <!-- 统计清机任务数量 -->
+    <select id="countByConditions" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM cleaning_tasks ct
+        WHERE 1=1
+        <if test="deviceId != null">
+            AND ct.device_id = #{deviceId}
+        </if>
+        <if test="operatorId != null">
+            AND (ct.operator_a_id = #{operatorId} OR ct.operator_b_id = #{operatorId})
+        </if>
+        <if test="taskStatus != null and taskStatus != ''">
+            AND ct.task_status = #{taskStatus}
+        </if>
+        <if test="startTime != null">
+            AND ct.planned_start_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND ct.planned_start_time &lt;= #{endTime}
+        </if>
+    </select>
+
+    <!-- 统计清机任务状态分布 -->
+    <select id="countByStatus" resultType="java.util.Map">
+        SELECT
+        task_status,
+        COUNT(*) as count
+        FROM cleaning_tasks
+        WHERE 1=1
+        <if test="startTime != null">
+            AND planned_start_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND planned_start_time &lt;= #{endTime}
+        </if>
+        GROUP BY task_status
+    </select>
+
+    <!-- 批量更新任务状态 -->
+    <update id="batchUpdateStatus">
+        UPDATE cleaning_tasks
+        SET task_status = #{taskStatus}
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

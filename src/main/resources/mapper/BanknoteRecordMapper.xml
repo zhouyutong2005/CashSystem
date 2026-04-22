@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cashsystem.mapper.BanknoteRecordMapper">
+
+    <!-- 批量插入冠字号记录 -->
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO banknote_records(deposit_record_id, serial_number, currency, denomination, record_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.depositRecordId}, #{item.serialNumber}, #{item.currency}, #{item.denomination}, #{item.recordTime})
+        </foreach>
+    </insert>
+
+    <!-- 根据存款记录ID列表查询冠字号 -->
+    <select id="findByDepositRecordIds" resultType="com.cashsystem.entity.BanknoteRecord">
+        SELECT * FROM banknote_records
+        WHERE deposit_record_id IN
+        <foreach collection="depositRecordIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER BY record_time DESC
+    </select>
+
+    <!-- 统计冠字号数量 -->
+    <select id="countByDepositRecordId" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM banknote_records
+        WHERE deposit_record_id = #{depositRecordId}
+    </select>
+
+</mapper>

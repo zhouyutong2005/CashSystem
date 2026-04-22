@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cashsystem.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.cashsystem.entity.User">
+        <id column="id" property="id" />
+        <result column="account" property="account" />
+        <result column="password" property="password" />
+        <result column="account_type" property="accountType" />
+        <result column="client_id" property="clientId" />
+        <result column="role" property="role" />
+        <result column="full_name" property="fullName" />
+        <result column="contact" property="contact" />
+        <result column="login_times" property="loginTimes" />
+        <result column="last_login" property="lastLogin" />
+        <result column="status" property="status" />
+        <result column="avatar" property="avatar" />
+    </resultMap>
+
+    <!-- 根据角色查询用户 -->
+    <select id="findByRole" resultMap="BaseResultMap">
+        SELECT * FROM platform_accounts
+        WHERE role = #{role} AND status = '启用'
+        ORDER BY id DESC
+    </select>
+
+    <!-- 根据客户ID查询用户 -->
+    <select id="findByClientId" resultMap="BaseResultMap">
+        SELECT * FROM platform_accounts
+        WHERE client_id = #{clientId} AND status = '启用'
+        ORDER BY full_name
+    </select>
+
+    <!-- 分页查询用户 -->
+    <select id="findByPage" resultMap="BaseResultMap">
+        SELECT * FROM platform_accounts
+        WHERE 1=1
+        <if test="role != null and role != ''">
+            AND role = #{role}
+        </if>
+        <if test="accountType != null and accountType != ''">
+            AND account_type = #{accountType}
+        </if>
+        <if test="status != null and status != ''">
+            AND status = #{status}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (account LIKE CONCAT('%', #{keyword}, '%') OR full_name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+        ORDER BY id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <!-- 统计用户数量 -->
+    <select id="countByConditions" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM platform_accounts
+        WHERE 1=1
+        <if test="role != null and role != ''">
+            AND role = #{role}
+        </if>
+        <if test="accountType != null and accountType != ''">
+            AND account_type = #{accountType}
+        </if>
+        <if test="status != null and status != ''">
+            AND status = #{status}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (account LIKE CONCAT('%', #{keyword}, '%') OR full_name LIKE CONCAT('%', #{keyword}, '%'))
+        </if>
+    </select>
+
+    <!-- 批量更新用户状态 -->
+    <update id="batchUpdateStatus">
+        UPDATE platform_accounts
+        SET status = #{status}
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <!-- 用户统计 -->
+    <select id="getUserStatistics" resultType="java.util.Map">
+        SELECT
+        COUNT(*) as total_count,
+        COUNT(CASE WHEN status = '启用' THEN 1 END) as active_count,
+        COUNT(CASE WHEN status = '停用' THEN 1 END) as inactive_count,
+        COUNT(CASE WHEN account_type = 'admin' THEN 1 END) as admin_count,
+        COUNT(CASE WHEN account_type = 'operator' THEN 1 END) as operator_count
+        FROM platform_accounts
+        WHERE 1=1
+        <if test="clientId != null">
+            AND client_id = #{clientId}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cashsystem.mapper.DepositRecordMapper">
+
+    <!-- 基础结果映射 -->
+    <resultMap id="BaseResultMap" type="com.cashsystem.entity.DepositRecord">
+        <id column="id" property="id" />
+        <result column="deposit_no" property="depositNo" />
+        <result column="device_id" property="deviceId" />
+        <result column="terminal_operator_id" property="terminalOperatorId" />
+        <result column="account" property="account" />
+        <result column="deposit_type_id" property="depositTypeId" />
+        <result column="currency" property="currency" />
+        <result column="cash_amount" property="cashAmount" />
+        <result column="cash_count" property="cashCount" />
+        <result column="envelope_amount" property="envelopeAmount" />
+        <result column="total" property="total" />
+        <result column="cleaning_batch" property="cleaningBatch" />
+        <result column="settlement_batch" property="settlementBatch" />
+        <result column="audit_status" property="auditStatus" />
+        <result column="deposit_time" property="depositTime" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 复杂查询：按条件查询存款记录 -->
+    <select id="findByConditions" resultMap="BaseResultMap">
+        SELECT * FROM deposit_records
+        WHERE 1=1
+        <if test="deviceId != null">
+            AND device_id = #{deviceId}
+        </if>
+        <if test="operatorId != null">
+            AND terminal_operator_id = #{operatorId}
+        </if>
+        <if test="startTime != null">
+            AND deposit_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND deposit_time &lt;= #{endTime}
+        </if>
+        <if test="auditStatus != null and auditStatus != ''">
+            AND audit_status = #{auditStatus}
+        </if>
+        <if test="depositTypeId != null">
+            AND deposit_type_id = #{depositTypeId}
+        </if>
+        <if test="currency != null and currency != ''">
+            AND currency = #{currency}
+        </if>
+        <if test="minAmount != null">
+            AND total >= #{minAmount}
+        </if>
+        <if test="maxAmount != null">
+            AND total &lt;= #{maxAmount}
+        </if>
+        ORDER BY deposit_time DESC
+    </select>
+
+    <!-- 分页查询存款记录 -->
+    <select id="findByPage" resultMap="BaseResultMap">
+        SELECT * FROM deposit_records
+        WHERE 1=1
+        <if test="deviceId != null">
+            AND device_id = #{deviceId}
+        </if>
+        <if test="operatorId != null">
+            AND terminal_operator_id = #{operatorId}
+        </if>
+        <if test="startTime != null">
+            AND deposit_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND deposit_time &lt;= #{endTime}
+        </if>
+        <if test="auditStatus != null and auditStatus != ''">
+            AND audit_status = #{auditStatus}
+        </if>
+        <if test="depositTypeId != null">
+            AND deposit_type_id = #{depositTypeId}
+        </if>
+        ORDER BY deposit_time DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <!-- 统计分页总数 -->
+    <select id="countByConditions" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM deposit_records
+        WHERE 1=1
+        <if test="deviceId != null">
+            AND device_id = #{deviceId}
+        </if>
+        <if test="operatorId != null">
+            AND terminal_operator_id = #{operatorId}
+        </if>
+        <if test="startTime != null">
+            AND deposit_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND deposit_time &lt;= #{endTime}
+        </if>
+        <if test="auditStatus != null and auditStatus != ''">
+            AND audit_status = #{auditStatus}
+        </if>
+        <if test="depositTypeId != null">
+            AND deposit_type_id = #{depositTypeId}
+        </if>
+    </select>
+
+    <!-- 存款记录统计查询 -->
+    <select id="getDepositStatistics" resultType="java.util.Map">
+        SELECT
+        COUNT(*) as total_count,
+        COALESCE(SUM(total), 0) as total_amount,
+        COALESCE(SUM(cash_amount), 0) as cash_total,
+        COALESCE(SUM(envelope_amount), 0) as envelope_total,
+        COALESCE(AVG(total), 0) as avg_amount,
+        MAX(total) as max_amount,
+        MIN(total) as min_amount
+        FROM deposit_records
+        WHERE 1=1
+        <if test="startTime != null">
+            AND deposit_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND deposit_time &lt;= #{endTime}
+        </if>
+        <if test="deviceId != null">
+            AND device_id = #{deviceId}
+        </if>
+        <if test="auditStatus != null and auditStatus != ''">
+            AND audit_status = #{auditStatus}
+        </if>
+        <if test="depositTypeId != null">
+            AND deposit_type_id = #{depositTypeId}
+        </if>
+    </select>
+
+    <!-- 统计每日存款总额 -->
+    <select id="getDailyTotal" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(total), 0)
+        FROM deposit_records
+        WHERE DATE(deposit_time) = #{date}
+        <if test="auditStatus != null and auditStatus != ''">
+            AND audit_status = #{auditStatus}
+        </if>
+        <if test="deviceId != null">
+            AND device_id = #{deviceId}
+        </if>
+    </select>
+
+    <!-- 按日期分组统计 -->
+    <select id="getDailyStatistics" resultType="java.util.Map">
+        SELECT
+        DATE(deposit_time) as date,
+        COUNT(*) as count,
+        COALESCE(SUM(total), 0) as total_amount,
+        COALESCE(SUM(cash_amount), 0) as cash_amount,
+        COALESCE(SUM(envelope_amount), 0) as envelope_amount
+        FROM deposit_records
+        WHERE deposit_time BETWEEN #{startDate} AND #{endDate}
+        <if test="deviceId != null">
+            AND device_id = #{deviceId}
+        </if>
+        <if test="auditStatus != null and auditStatus != ''">
+            AND audit_status = #{auditStatus}
+        </if>
+        GROUP BY DATE(deposit_time)
+        ORDER BY date DESC
+    </select>
+
+    <!-- 按设备统计存款 -->
+    <select id="getStatisticsByDevice" resultType="java.util.Map">
+        SELECT
+        device_id,
+        COUNT(*) as deposit_count,
+        COALESCE(SUM(total), 0) as total_amount,
+        COALESCE(AVG(total), 0) as avg_amount
+        FROM deposit_records
+        WHERE deposit_time BETWEEN #{startTime} AND #{endTime}
+        <if test="auditStatus != null and auditStatus != ''">
+            AND audit_status = #{auditStatus}
+        </if>
+        GROUP BY device_id
+        ORDER BY total_amount DESC
+    </select>
+
+    <!-- 按操作员统计存款 -->
+    <select id="getStatisticsByOperator" resultType="java.util.Map">
+        SELECT
+        terminal_operator_id,
+        COUNT(*) as deposit_count,
+        COALESCE(SUM(total), 0) as total_amount,
+        COALESCE(AVG(total), 0) as avg_amount
+        FROM deposit_records
+        WHERE deposit_time BETWEEN #{startTime} AND #{endTime}
+        <if test="auditStatus != null and auditStatus != ''">
+            AND audit_status = #{auditStatus}
+        </if>
+        GROUP BY terminal_operator_id
+        ORDER BY total_amount DESC
+    </select>
+
+    <!-- 查询需要审核的大额存款 -->
+    <select id="findLargeAmountRecords" resultMap="BaseResultMap">
+        SELECT * FROM deposit_records
+        WHERE audit_status = '待审核'
+        AND total >= #{minAmount}
+        <if test="startTime != null">
+            AND deposit_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND deposit_time &lt;= #{endTime}
+        </if>
+        ORDER BY total DESC, deposit_time DESC
+    </select>
+
+    <!-- 批量更新审核状态 -->
+    <update id="batchUpdateAuditStatus">
+        UPDATE deposit_records
+        SET audit_status = #{auditStatus}
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        <if test="auditStatus == '通过'">
+            , cleaning_batch = #{cleaningBatch}
+        </if>
+    </update>
+
+    <!-- 批量更新清机批次号 -->
+    <update id="batchUpdateCleaningBatch">
+        UPDATE deposit_records
+        SET cleaning_batch = #{cleaningBatch}
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        AND audit_status = '通过'
+    </update>
+
+    <!-- 批量更新日结批次号 -->
+    <update id="batchUpdateSettlementBatch">
+        UPDATE deposit_records
+        SET settlement_batch = #{settlementBatch}
+        WHERE cleaning_batch = #{cleaningBatch}
+          AND audit_status = '通过'
+    </update>
+
+    <!-- 查询未日结的存款记录 -->
+    <select id="findUnsettledRecords" resultMap="BaseResultMap">
+        SELECT * FROM deposit_records
+        WHERE audit_status = '通过'
+        AND (settlement_batch IS NULL OR settlement_batch = '')
+        <if test="startTime != null">
+            AND deposit_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND deposit_time &lt;= #{endTime}
+        </if>
+        <if test="deviceId != null">
+            AND device_id = #{deviceId}
+        </if>
+        ORDER BY deposit_time ASC
+    </select>
+
+    <!-- 查询指定清机批次的存款记录 -->
+    <select id="findByCleaningBatch" resultMap="BaseResultMap">
+        SELECT * FROM deposit_records
+        WHERE cleaning_batch = #{cleaningBatch}
+          AND audit_status = '通过'
+        ORDER BY deposit_time ASC
+    </select>
+
+    <!-- 查询指定日结批次的存款记录 -->
+    <select id="findBySettlementBatch" resultMap="BaseResultMap">
+        SELECT * FROM deposit_records
+        WHERE settlement_batch = #{settlementBatch}
+          AND audit_status = '通过'
+        ORDER BY deposit_time ASC
+    </select>
+
+    <!-- 获取存款记录数量统计 -->
+    <select id="getCountStatistics" resultType="java.util.Map">
+        SELECT
+        audit_status,
+        COUNT(*) as count
+        FROM deposit_records
+        WHERE 1=1
+        <if test="startTime != null">
+            AND deposit_time >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            AND deposit_time &lt;= #{endTime}
+        </if>
+        <if test="deviceId != null">
+            AND device_id = #{deviceId}
+        </if>
+        GROUP BY audit_status
+    </select>
+
+</mapper>
