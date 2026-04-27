@@ -3,6 +3,7 @@ package com.cashsystem.service.impl;
 import com.cashsystem.entity.User;
 import com.cashsystem.mapper.UserMapper;
 import com.cashsystem.service.UserService;
+import com.cashsystem.service.impl.AuthServiceImpl;
 import com.cashsystem.util.JwtUtil;
 import com.cashsystem.util.PasswordUtil;
 import com.cashsystem.vo.LoginResultVO;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final JwtUtil jwtUtil;
     private final PasswordUtil passwordUtil;
+    private final AuthServiceImpl authService;  // 用于登录后存 Token 到 Redis
 
     @Override
     public LoginResultVO login(String account, String password) {
@@ -47,7 +49,10 @@ public class UserServiceImpl implements UserService {
             // 5. 生成JWT token
             String token = jwtUtil.generateToken(user.getId(), user.getAccount(), user.getRole());
 
-            // 6. 返回登录结果
+            // 6. 将 token 存入 Redis（支持主动失效、分布式部署）
+            authService.storeToken(token, user.getId(), user.getAccount(), user.getRole());
+
+            // 7. 返回登录结果
             return LoginResultVO.success("登录成功", token, user);
 
         } catch (Exception e) {

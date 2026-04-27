@@ -29,6 +29,12 @@ spring:
           max-idle: 8
           min-idle: 0
 
+  # 缓存配置
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000   # 默认缓存过期时间 10 分钟（毫秒）
+
   # 文件上传配置
   servlet:
     multipart:
